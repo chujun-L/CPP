@@ -4,5 +4,6 @@
 #include <graphics.h>
 
 void menu();
+void captureMouse();
 
 #endif // !__TANK_H__
