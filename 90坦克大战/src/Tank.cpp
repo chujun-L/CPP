@@ -18,3 +18,30 @@ void menu()
 	fillrectangle(350, 200, 430, 240);				// 开始按键的边框
 	outtextxy(365, 210, _T("开始"));				// 显示“开始”
 }
+
+void captureMouse()
+{
+	MOUSEMSG mouse;
+	IMAGE illustrate;
+	loadimage(&illustrate, _T("Img/illustrate.jpg"));
+
+	while (1 == 1)
+	{
+		mouse = GetMouseMsg();
+		switch (mouse.uMsg)
+		{
+		case WM_LBUTTONDOWN:
+			if (mouse.x > 230 && mouse.x < 310 && mouse.y > 200 && mouse.y < 240)
+			{
+				putimage(150, 250, &illustrate);		//显示说明
+			}
+			else
+			{
+				solidrectangle(150, 250, 450, 550);	//遮挡说明
+			}
+			break;
+		default:
+			break;
+		}
+	}
+}
