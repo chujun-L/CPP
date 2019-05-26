@@ -4,6 +4,7 @@
 int main()
 {
 	menu();
+	captureMouse();
 
 	system("pause");
 	closegraph();
