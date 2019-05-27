@@ -1,6 +1,41 @@
 #include <stdio.h>
+#include <iostream>
 
-#define TEST2
+using namespace std;
+
+#define TEST6
+
+#ifdef TEST6
+class Base
+{
+public:
+	virtual int foo(int x)
+	{
+		return x * 10;
+	}
+
+	int foo(char x[14])			// 当前的char x[14]是形参，是一个指针
+	{
+		return sizeof(x) + 10;
+	}
+};
+
+class Derived : public Base
+{
+	int foo(int x)
+	{
+		return x * 20;
+	}
+
+	virtual int foo(char x[10])
+	{
+		return sizeof(x) + 20;
+	}
+
+
+};
+#endif // TEST6
+
 
 int main()
 {
@@ -75,6 +110,25 @@ int main()
 	((volatile int *)0xaae0275)[0] = 1;
 	(volatile int *)0xaae0275 = 1;
 #endif // TEST4
+
+#ifdef TEST5
+	char ch[7] = { "65ab21" };
+	int i, s = 0;
+
+	for (i = 0; ch[i] >= '0' && ch[i] <='9'; i += 2)	// 判断是否0~9的数字
+		s = 10 * s + ch[i] - '0';
+
+	printf("%d\n", s);
+#endif // TEST5
+
+#ifdef TEST6
+	Derived stDerived;
+	Base *pstBase = &stDerived;
+
+	char x[10];
+	printf("%d\n", pstBase->foo(100) + pstBase->foo(x));
+
+#endif // TEST6
 
 
 	return 0;
