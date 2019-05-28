@@ -1,8 +1,10 @@
 #include <iostream>
 #include <stdio.h>
+#include <iomanip>
+
 using namespace std;
 
-#define EXERCISE3
+#define EXERCISE5
 
 #ifdef EXERCISE3
 void func(char x[10])
@@ -88,6 +90,52 @@ int main()
 	func(x);
 #endif // EXERCISE3
 
+#ifdef EXERCISE4
+	// 指针访问多维数组
+	int nArry[2][3] = {
+		{1, 2, 3},
+		{4, 5, 6}
+	};
+
+	int *pArry = &nArry[0][0];
+	cout << *(pArry + 5) << endl;
+
+#endif // EXERCISE4
+
+#ifdef EXERCISE5
+#define NUM  10
+	// 杨辉三角(分解成二维数组)
+	int nYHTriangle[NUM][NUM] = { 0 };
+
+	// 计算杨辉三角的数值
+	for (int i = 0; i < NUM; i++)
+	{
+		for (int j = 0; j <= i; j++)
+		{
+			if (j == 0 || j == i)
+			{
+				nYHTriangle[i][j] = 1;
+			}
+			else
+			{
+				nYHTriangle[i][j] = nYHTriangle[i - 1][j - 1] + nYHTriangle[i - 1][j];
+			}
+
+		}
+	}
+
+	// 格式化输出
+	for (int i = 0; i < NUM; i++)
+	{
+		cout << setw((NUM - i) * 3) << nYHTriangle[i][0];
+
+		for (int j = 1; j <= i; j++)
+		{
+			cout << setw(6) << nYHTriangle[i][j];
+		}
+		cout << endl;
+	}
+#endif // EXERCISE5
 
 	system("pause");
 	return 0;
