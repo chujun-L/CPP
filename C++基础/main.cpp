@@ -4,6 +4,13 @@ using namespace std;
 
 #define EXERCISE3
 
+#ifdef EXERCISE3
+void func(char x[10])
+{
+	printf("%d\n", sizeof(x));
+}
+#endif // EXERCISE3
+
 int main()
 {
 #ifdef EXERCISE1
@@ -73,11 +80,12 @@ int main()
 #endif // EXERCISE2
 
 #ifdef EXERCISE3
+	// 数组作为变量及形参时候的大小判断
+	char x[14];
 
-	int arry[5] = { 1, 2, 3, 4, 5 };
+	printf("%d\n", sizeof(x));
 
-
-
+	func(x);
 #endif // EXERCISE3
 
 
