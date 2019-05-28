@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define DIM 7		// DIM: dimensional 维度
+#define NUM 7
 
 
 /*
@@ -12,7 +12,7 @@ using namespace std;
  * sFileName: 文件名
  * nArry:     保存的数组
  */
-bool ReadFile2Arry(string sFileName, int nArry[][DIM])
+bool ReadFile2Arry(string sFileName, int nArry[][NUM])
 {
 	ifstream file;
 	int nRows = 0, nCols = 0;
@@ -25,7 +25,7 @@ bool ReadFile2Arry(string sFileName, int nArry[][DIM])
 	}
 
 	file >> nRows >> nCols;		// 在map.txt文件中读取行数、列数
-	if (nRows > DIM || nCols > DIM)
+	if (nRows > NUM || nCols > NUM)
 	{
 		cout << "文件过大" << endl;
 		return false;
@@ -50,7 +50,7 @@ bool ReadFile2Arry(string sFileName, int nArry[][DIM])
  * nArry: 要判断的值所在的数组
  * nRows、nCols: 要判断的值所在数组的下标
  */
-bool isPeakInArry(int nArry[][DIM], int nRows, int nCols)
+bool isPeakInArry(int nArry[][NUM], int nRows, int nCols)
 {
 	if (nArry[nRows][nCols] > nArry[nRows - 1][nCols] &&
 		nArry[nRows][nCols] > nArry[nRows + 1][nCols] &&
@@ -68,7 +68,7 @@ bool isPeakInArry(int nArry[][DIM], int nRows, int nCols)
 int main()
 {
 	string cFileName = "map.txt";
-	int gMap[DIM][DIM];
+	int gMap[NUM][NUM];
 
 	if (ReadFile2Arry(cFileName, gMap))
 	{
