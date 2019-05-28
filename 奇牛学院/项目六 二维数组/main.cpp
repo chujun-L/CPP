@@ -39,6 +39,7 @@ bool ReadFile2Arry(string sFileName, int nArry[][DIM])
 		}
 	}
 
+	file.close();
 	return true;
 }
 
