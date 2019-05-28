@@ -2,7 +2,7 @@
 #include <stdio.h>
 using namespace std;
 
-#define EXERCISE4
+#define EXERCISE3
 
 #ifdef EXERCISE3
 void func(char x[10])
@@ -10,18 +10,6 @@ void func(char x[10])
 	printf("%d\n", sizeof(x));
 }
 #endif // EXERCISE3
-
-#ifdef EXERCISE4
-// 递归方式
-int Fibo(int n)
-{
-	if (n == 1 || n == 2)
-		return 1;
-
-	return Fibo(n - 1) + Fibo(n - 2);
-}
-#endif // EXERCISE4
-
 
 int main()
 {
@@ -94,36 +82,13 @@ int main()
 #ifdef EXERCISE3
 	// 数组作为变量及形参时候的大小判断
 	char x[14];
-	char *pChar = NULL;
 
-	printf("%d %d\n", sizeof(x), sizeof(pChar));
-	
+	printf("%d\n", sizeof(x));
 
 	func(x);
 #endif // EXERCISE3
 
-#ifdef EXERCISE4
-	// 斐波那契数列(Fibo)，还可以用递归的方式
-	int n = 0, i = 0, k1 = 1, k2 = 1, swap = 0;
-
-	cout << "输入大于2的正整数" << endl;
-	cin >> n;
-	//cout << "1 1 ";
-
-	//for (i = 3; i <= n; i++)
-	//{
-	//	swap = k1 + k2;
-	//	k1 = k2;
-	//	k2 = swap;
-	//	cout << swap << " ";
-	//}
-	//cout << endl;
-
-	cout << Fibo(n) << endl;
-
-#endif // EXERCISE4
 
 	system("pause");
 	return 0;
 }
-
