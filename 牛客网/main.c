@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define TEST8
+#define TEST9
 
 #ifdef TEST8
 struct mybitfields
@@ -39,9 +39,23 @@ int main()
 	test.b = 3;
 	test.c = 0;
 
-	i = *((short *)&test);
+	i = *((short *)& test);
 	printf("%d\n", i);
 #endif // TEST8
+
+#ifdef TEST9
+	int nCount = 0;
+	int x = 9999;
+
+	while (x)
+	{
+		nCount++;
+		x = x & (x - 1);
+	}
+
+	printf("%d\n", nCount);
+#endif // TEST9
+
 
 	system("pause");
 	return 0;
