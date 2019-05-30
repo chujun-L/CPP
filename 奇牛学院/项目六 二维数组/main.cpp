@@ -95,6 +95,8 @@ int extremes(int *nArry, int flag)
 {
 	int nRet = *nArry;
 	int nRows = 6, nCols = 7;
+	int i = 0, j = 0;
+	int *pBegin = nArry;
 
 	for (int i = 0; i < nRows * nCols - 1; i++)
 	{
@@ -114,6 +116,16 @@ int extremes(int *nArry, int flag)
 	}
 
 	// 用指针怎么推导出二维数组的下标? 然后求出nArry[i][j]
+	for (int n = 0; n < nRows * nCols; n++)
+	{
+		if (nRet == *pBegin)
+		{
+			i = n / nCols;
+			j = n % nCols;
+			cout << "nArry[" << i << "]" << "[" << j << "]" << " ";
+		}
+		pBegin++;
+	}
 
 	return nRet;
 }
