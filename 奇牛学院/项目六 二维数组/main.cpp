@@ -13,7 +13,7 @@ using namespace std;
  * sFileName: 文件名
  * nArry:     保存的数组
  */
-bool ReadFile2Arry(string sFileName, int nArry[][NUM])
+bool ReadFile2Arry(string sFileName, int *pArry)
 {
 	ifstream file;
 	int nRows = 0, nCols = 0;
@@ -32,12 +32,9 @@ bool ReadFile2Arry(string sFileName, int nArry[][NUM])
 		return false;
 	}
 
-	for (int row = 0; row < nRows; row++)
+	for (int i = 0; i < nRows * nCols; i++)
 	{
-		for (int col = 0; col < nCols; col++)
-		{
-			file >> nArry[row][col];
-		}
+		file >> *pArry++;			// 读取文件内容到数组
 	}
 
 	file.close();
@@ -94,39 +91,30 @@ bool isValleyInArry(int nArry[][NUM], int nRows, int nCols)
  * nArry: 要查找的数组
  * flag： 最大或最小的标志
  */
-int extremes(int nArry[][NUM], int flag)
+int extremes(int *nArry, int flag)
 {
-	int nRet = nArry[0][0];
+	int nRet = *nArry;
+	int nRows = 6, nCols = 7;
 
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < nRows * nCols - 1; i++)
 	{
-		for (int j = 0; j < 7; j++)
+		nArry++;
+
+		switch (flag)
 		{
-			switch (flag)
-			{
-			case MAX:
-				nRet = nArry[i][j] > nRet ? nArry[i][j] : nRet;
-				break;
-			case MIN:
-				nRet = nArry[i][j] < nRet ? nArry[i][j] : nRet;
-				break;
-			default:
-				break;
-			}
+		case MAX:
+			nRet = *nArry > nRet ? *nArry : nRet;
+			break;
+		case MIN:
+			nRet = *nArry < nRet ? *nArry : nRet;
+			break;
+		default:
+			break;
 		}
 	}
 
-	// 打印最大或最小值在数组中的位置
-	for (int i = 0; i < 6; i++)
-	{
-		for (int j = 0; j < 7; j++)
-		{
-			if (nArry[i][j] == nRet)
-			{
-				cout << "Arry[" << i << "]" << "[" << j << "]" << " ";
-			}
-		}
-	}
+	// 用指针怎么推导出二维数组的下标? 然后求出nArry[i][j]
+
 	return nRet;
 }
 
@@ -136,8 +124,9 @@ int main()
 	string cFileName = "map.txt";
 	int gMap[NUM][NUM];
 	int nPeakNum = 0;
+	int *pMap = &gMap[0][0];
 
-	if (ReadFile2Arry(cFileName, gMap))
+	if (ReadFile2Arry(cFileName, pMap))
 	{
 		// 遍历数组，找出峰顶或峰谷的值
 		for (int row = 1; row < 6; row++)
@@ -159,8 +148,8 @@ int main()
 		}
 		cout << "峰点的数目： " << nPeakNum << endl;
 
-		cout << "最大值：" << extremes(gMap, MAX) << endl;
-		cout << "最小值：" << extremes(gMap, MIN) << endl;
+		cout << "最大值：" << extremes(pMap, MAX) << endl;
+		cout << "最小值：" << extremes(pMap, MIN) << endl;
 	}
 
 	system("pause");
