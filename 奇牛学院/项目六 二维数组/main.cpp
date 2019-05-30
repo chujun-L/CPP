@@ -53,10 +53,15 @@ bool ReadFile2Arry(string sFileName, int nArry[][NUM])
  */
 bool isPeakInArry(int nArry[][NUM], int nRows, int nCols)
 {
-	if (nArry[nRows][nCols] > nArry[nRows - 1][nCols] &&
-		nArry[nRows][nCols] > nArry[nRows + 1][nCols] &&
-		nArry[nRows][nCols] > nArry[nRows][nCols - 1] &&
-		nArry[nRows][nCols] > nArry[nRows][nCols + 1])
+	if (nArry[nRows][nCols] > nArry[nRows - 1][nCols] &&		// 上
+		nArry[nRows][nCols] > nArry[nRows + 1][nCols] &&		// 下
+		nArry[nRows][nCols] > nArry[nRows][nCols - 1] &&		// 左
+		nArry[nRows][nCols] > nArry[nRows][nCols + 1] &&		// 右
+		nArry[nRows][nCols] > nArry[nRows - 1][nCols - 1] &&	// 左上角
+		nArry[nRows][nCols] > nArry[nRows - 1][nCols + 1] &&	// 右上角
+		nArry[nRows][nCols] > nArry[nRows + 1][nCols - 1] &&	// 左下角
+		nArry[nRows][nCols] > nArry[nRows + 1][nCols + 1])		// 右下角
+		
 	{
 		return true;
 	}
@@ -145,11 +150,11 @@ int main()
 					nPeakNum++;
 				}
 
-				
+
 				if (isValleyInArry(gMap, row, col))
 				{
 					cout << "谷点的位置： " << gMap[row][col] << endl;
-				}	
+				}
 			}
 		}
 		cout << "峰点的数目： " << nPeakNum << endl;
