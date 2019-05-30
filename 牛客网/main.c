@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
 
-#define TEST9
+#define TEST10
 
 #ifdef TEST8
 struct mybitfields
@@ -10,6 +12,32 @@ struct mybitfields
 	unsigned short c : 7;
 };
 #endif // TEST8
+
+#ifdef TEST10
+char *MyStrcpy(char *cDest, const char *cSrc, int nSize)
+{
+	assert(cDest);
+	assert(cSrc);
+
+	char *ret = cDest;
+
+	// ÓÐÒç³ö·çÏÕ
+	//while (*cDest++ = *cSrc++);
+	//{
+	//	cDest++;
+	//	cSrc++;
+	//}
+
+	while (nSize)
+	{
+		*cDest++ = *cSrc++;
+		nSize--;
+	}
+
+	return ret;
+}
+#endif // TEST10
+
 
 
 int main()
@@ -55,6 +83,19 @@ int main()
 
 	printf("%d\n", nCount);
 #endif // TEST9
+
+#ifdef TEST10
+	//char *cDest = NULL;
+	char buf[20];
+	char *cSrc = "hello world";
+	char *pChar = NULL;
+
+	pChar = MyStrcpy(buf, cSrc, sizeof(buf));
+
+	printf("%s\n", pChar);
+
+#endif // TEST10
+
 
 
 	system("pause");
