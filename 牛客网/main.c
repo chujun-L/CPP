@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <string.h>
 
 #define TEST11
 
@@ -98,13 +97,8 @@ int main()
 #endif // TEST10
 
 #ifdef TEST11
-	// 字符串与字符数组的比较
-	char a[] = "ABCDEF";
-	char b[] = { 'A','B','C','D','E','F', '\0' };	// 不加'\0'，大小不确定
 
-	printf("strlen a: %d, strlen b: %d", strlen(a), strlen(b));
 #endif // TEST11
-
 
 
 	system("pause");
