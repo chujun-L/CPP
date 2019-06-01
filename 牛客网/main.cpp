@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define TEST6
+#define TEST1
 
 #ifdef TEST6
 class Base
@@ -37,7 +37,7 @@ class Derived : public Base
 #endif // TEST6
 
 
-int main()
+int main1()
 {
 #ifdef TEST1
 	char *a = "you", b[] = "welcome # you # to # china!";
@@ -129,6 +129,8 @@ int main()
 	printf("%d\n", pstBase->foo(100) + pstBase->foo(x));
 
 #endif // TEST6
+
+
 
 
 	return 0;
