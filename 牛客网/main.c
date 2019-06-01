@@ -97,7 +97,9 @@ int main()
 #endif // TEST10
 
 #ifdef TEST11
-
+	// ×Ö·û´®Óë×Ö·û
+	char a[] = "ABCDEF";
+	char b[] = { 'A','B','C','D','E','F', '\0' };
 #endif // TEST11
 
 
