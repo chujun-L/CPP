@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <string.h>
 
-#define TEST12
+#define TEST14
 
 #ifdef TEST8
 struct mybitfields
@@ -39,6 +39,14 @@ char *MyStrcpy(char *cDest, const char *cSrc, int nSize)
 }
 #endif // TEST10
 
+#ifdef TEST14
+void func()
+{
+	// 局部静态变量
+	static int i = 0;
+	printf("i: %d\n", i++);
+}
+#endif // TEST14
 
 
 int main()
@@ -98,7 +106,7 @@ int main()
 #endif // TEST10
 
 #ifdef TEST11
-	// 字符串与字符
+	// 字符串与字符 sizeof()是运算符  strlen()是函数
 	char a[] = "ABCDEF";
 	char b[] = { 'A','B','C','D','E','F', '\0' };
 
@@ -110,7 +118,46 @@ int main()
 	printf("%%\n");
 #endif // TEST12
 
+#ifdef TEST13
+	// n的阶乘
+	int n = 0, nFac = 1;
+	
+	printf("输入一个正整数n，求它的阶乘\n");
 
+	while (1)
+	{
+		scanf_s("%d", &n);
+		if (n < 0)
+		{
+			printf("输入的数不能为负数\n");
+		}
+		else if ( n == 1)
+		{
+			printf("1\n");
+			exit(0);
+		}
+		else
+		{
+			break;
+		}
+			
+	}
+	
+	for (int i = 1; i != n + 1; i++)
+	{
+		nFac *= i;
+		printf("%d ", nFac);
+	}
+	printf("\n");
+#endif // TEST13
+
+#ifdef TEST14
+	func();
+	func();
+	func();
+#endif // TEST14
+	
+	
 	system("pause");
 	return 0;
 }
