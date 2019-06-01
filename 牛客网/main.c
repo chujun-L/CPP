@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <string.h>
 
-#define TEST11
+#define TEST12
 
 #ifdef TEST8
 struct mybitfields
@@ -104,6 +104,11 @@ int main()
 
 	printf("strlen a: %d, strlen b: %d\n", strlen(a), strlen(b));
 #endif // TEST11
+
+#ifdef TEST12
+	// ×ªÒå×Ö·û
+	printf("%%\n");
+#endif // TEST12
 
 
 	system("pause");
