@@ -162,6 +162,7 @@ int main()
 
 		cout << "最大值：" << extremes(pMap, MAX) << endl;
 		cout << "最小值：" << extremes(pMap, MIN) << endl;
+		cout << "hello world" << endl;
 	}
 
 	system("pause");
