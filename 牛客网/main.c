@@ -160,7 +160,7 @@ int main()
 #endif // TEST14
 
 #ifdef TEST15
-    // 断言的开关用法
+    // 鏂█寮�鍏崇殑鐢ㄦ硶
     int i = 100;
     assert(i < 100);
     i++;
