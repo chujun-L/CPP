@@ -5,7 +5,7 @@
 //#define NDEBUG
 #include <assert.h>
 
-#define TEST15
+#define TEST16
 
 #ifdef TEST8
 struct mybitfields
@@ -166,6 +166,12 @@ int main()
     i++;
 
 #endif // TEST15
+
+#ifdef TEST16
+   	// 访问空指针产生段错误 
+	int *p = NULL;
+	*p = 20;
+#endif // TEST16
 
 	return 0;
 }
