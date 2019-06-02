@@ -1,4 +1,4 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
@@ -22,7 +22,7 @@ char *MyStrcpy(char *cDest, const char *cSrc, int nSize)
 
 	char *ret = cDest;
 
-	// ÓĞÒç³ö·çÏÕ
+	// æœ‰æº¢å‡ºé£é™©
 	//while (*cDest++ = *cSrc++);
 	//{
 	//	cDest++;
@@ -42,7 +42,7 @@ char *MyStrcpy(char *cDest, const char *cSrc, int nSize)
 #ifdef TEST14
 void func()
 {
-	// ¾Ö²¿¾²Ì¬±äÁ¿
+	// å±€éƒ¨é™æ€å˜é‡
 	static int i = 0;
 	printf("i: %d\n", i++);
 }
@@ -52,8 +52,8 @@ void func()
 int main()
 {
 #ifdef TEST7
-	// Ö¸ÕëµÄÀàĞÍ
-	// char: 1¸ö×Ö½Ú  int: 4¸ö×Ö½Ú   long: 4¸ö×Ö½Ú  £¨32Î»»ú£©
+	// æŒ‡é’ˆçš„ç±»å‹
+	// char: 1ä¸ªå­—èŠ‚  int: 4ä¸ªå­—èŠ‚   long: 4ä¸ªå­—èŠ‚  ï¼ˆ32ä½æœºï¼‰
 	char *p = "abcdefg", *r;
 
 	long *q;
@@ -106,7 +106,7 @@ int main()
 #endif // TEST10
 
 #ifdef TEST11
-	// ×Ö·û´®Óë×Ö·û sizeof()ÊÇÔËËã·û  strlen()ÊÇº¯Êı
+	// å­—ç¬¦ä¸²ä¸å­—ç¬¦ sizeof()æ˜¯è¿ç®—ç¬¦  strlen()æ˜¯å‡½æ•°
 	char a[] = "ABCDEF";
 	char b[] = { 'A','B','C','D','E','F', '\0' };
 
@@ -114,22 +114,22 @@ int main()
 #endif // TEST11
 
 #ifdef TEST12
-	// ×ªÒå×Ö·û
+	// è½¬ä¹‰å­—ç¬¦
 	printf("%%\n");
 #endif // TEST12
 
 #ifdef TEST13
-	// nµÄ½×³Ë
+	// nçš„é˜¶ä¹˜
 	int n = 0, nFac = 1;
 	
-	printf("ÊäÈëÒ»¸öÕıÕûÊın£¬ÇóËüµÄ½×³Ë\n");
+	printf("è¾“å…¥ä¸€ä¸ªæ­£æ•´æ•°nï¼Œæ±‚å®ƒçš„é˜¶ä¹˜\n");
 
 	while (1)
 	{
 		scanf_s("%d", &n);
 		if (n < 0)
 		{
-			printf("ÊäÈëµÄÊı²»ÄÜÎª¸ºÊı\n");
+			printf("è¾“å…¥çš„æ•°ä¸èƒ½ä¸ºè´Ÿæ•°\n");
 		}
 		else if ( n == 1)
 		{
