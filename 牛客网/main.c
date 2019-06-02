@@ -5,7 +5,7 @@
 //#define NDEBUG
 #include <assert.h>
 
-#define TEST10
+#define TEST18
 
 #ifdef TEST8
 struct mybitfields
@@ -50,6 +50,30 @@ void func()
 }
 #endif // TEST14
 
+#ifdef TEST18
+	// 函数指针数组在菜单选择的用法
+void func1(void)
+{
+	printf("fun1\n");
+}	
+void func2(void)	
+{
+	printf("fun2\n");
+}	
+void func3(void)	
+{
+	printf("fun3\n");
+}	
+int show_menu(void)
+{
+	int n = 0;
+
+	printf("输入1 ~ 3: ");
+	scanf("%d", &n);
+
+	return n;
+}
+#endif // TEST18
 
 int main()
 {
@@ -172,5 +196,29 @@ int main()
 	*p = 20;
 #endif // TEST16
 
+#ifdef TEST17
+	// 指针访问字符串
+	char s[] = "desolate", *p = s;
+	// *p++, *(p++), (*p)++, *++p, *(++p), ++*p, ++(*p)
+	printf("%c\n", ++(*p));
+#endif // TEST17
+	
+#ifdef TEST18
+	int choice = 0;
+	void (*pFuncArray[])(void) = {func1, func2, func3};	// 函数指针数组
+
+	while (1)
+	{
+		choice = show_menu();
+		if (choice >= 1 && choice <= 3)
+		{
+			pFuncArray[choice - 1]();
+		}
+		else
+		{
+			break;
+		}
+	}
+#endif // TEST18
 	return 0;
 }
