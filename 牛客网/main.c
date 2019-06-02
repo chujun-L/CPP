@@ -5,7 +5,7 @@
 //#define NDEBUG
 #include <assert.h>
 
-#define TEST16
+#define TEST10
 
 #ifdef TEST8
 struct mybitfields
@@ -31,10 +31,10 @@ char *MyStrcpy(char *cDest, const char *cSrc, int nSize)
 	//	cSrc++;
 	//}
 
-	while (nSize)
+	while (nSize--)
 	{
 		*cDest++ = *cSrc++;
-		nSize--;
+		//nSize--;
 	}
 
 	return ret;
@@ -99,11 +99,10 @@ int main()
 	//char *cDest = NULL;
 	char buf[20];
 	char *cSrc = "hello world";
-	char *pChar = NULL;
 
-	pChar = MyStrcpy(buf, cSrc, sizeof(buf));
+	MyStrcpy(buf, cSrc, sizeof(buf));
 
-	printf("%s\n", pChar);
+	printf("%s\n", buf);
 
 #endif // TEST10
 
