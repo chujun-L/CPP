@@ -1,9 +1,11 @@
 ï»¿#include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 #include <string.h>
 
-#define TEST14
+//#define NDEBUG
+#include <assert.h>
+
+#define TEST15
 
 #ifdef TEST8
 struct mybitfields
@@ -156,8 +158,14 @@ int main()
 	func();
 	func();
 #endif // TEST14
-	
-	
-	system("pause");
+
+#ifdef TEST15
+    // ¶ÏÑÔµÄ¿ª¹ØÓÃ·¨
+    int i = 100;
+    assert(i < 100);
+    i++;
+
+#endif // TEST15
+
 	return 0;
 }
