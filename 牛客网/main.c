@@ -5,7 +5,7 @@
 //#define NDEBUG
 #include <assert.h>
 
-#define TEST18
+#define TEST17
 
 #ifdef TEST8
 struct mybitfields
@@ -198,9 +198,16 @@ int main()
 
 #ifdef TEST17
 	// 指针访问字符串
+#if 0	
 	char s[] = "desolate", *p = s;
 	// *p++, *(p++), (*p)++, *++p, *(++p), ++*p, ++(*p)
 	printf("%c\n", ++(*p));
+#endif
+	// 指针对数据的访问
+	int a[] = {10, 15, 4, 25, 3, -4};
+	int *p = &a[2];
+	// *(p+1), p[-1], p-a, a[*p++], *(a+a[2])
+	printf("%d\n", *(a+a[2]));
 #endif // TEST17
 	
 #ifdef TEST18
