@@ -5,7 +5,7 @@
 //#define NDEBUG
 #include <assert.h>
 
-#define TEST17
+#define TEST19
 
 #ifdef TEST8
 struct mybitfields
@@ -51,7 +51,7 @@ void func()
 #endif // TEST14
 
 #ifdef TEST18
-	// 函数指针数组在菜单选择的用法
+// 函数指针数组在菜单选择的用法
 void func1(void)
 {
 	printf("fun1\n");
@@ -74,6 +74,11 @@ int show_menu(void)
 	return n;
 }
 #endif // TEST18
+
+#ifdef TEST19
+#define trace(x, format) \
+	printf(#x "=%" #format "\n", x)		// printf("i=%d\n", i);
+#endif // TEST19
 
 int main()
 {
@@ -146,7 +151,7 @@ int main()
 #ifdef TEST13
 	// n的阶乘
 	int n = 0, nFac = 1;
-	
+
 	printf("输入一个正整数n，求它的阶乘\n");
 
 	while (1)
@@ -165,9 +170,9 @@ int main()
 		{
 			break;
 		}
-			
+
 	}
-	
+
 	for (int i = 1; i != n + 1; i++)
 	{
 		nFac *= i;
@@ -183,15 +188,15 @@ int main()
 #endif // TEST14
 
 #ifdef TEST15
-    // 断言开关的用法
-    int i = 100;
-    assert(i < 100);
-    i++;
+	// 断言开关的用法
+	int i = 100;
+	assert(i < 100);
+	i++;
 
 #endif // TEST15
 
 #ifdef TEST16
-   	// 访问空指针产生段错误 
+	// 访问空指针产生段错误 
 	int *p = NULL;
 	*p = 20;
 #endif // TEST16
@@ -209,7 +214,7 @@ int main()
 	// *(p+1), p[-1], p-a, a[*p++], *(a+a[2])
 	printf("%d\n", *(a+a[2]));
 #endif // TEST17
-	
+
 #ifdef TEST18
 	int choice = 0;
 	void (*pFuncArray[])(void) = {func1, func2, func3};	// 函数指针数组
@@ -227,5 +232,22 @@ int main()
 		}
 	}
 #endif // TEST18
+
+#ifdef TEST19
+	// 预处理实现3个功能：1、头文件的包含 2、宏的扩展 3、条件编辑
+	// 预定义宏 __FILE__ / __LINE__ / __DATE__ / __TIME__
+	// 预处理运算符 #  ##  Defined
+	int i = 1;
+	float x = 2.0;
+	char *s = "three";
+
+	trace(i, d);
+	trace(x, f);
+	trace(s, s);	
+#endif // TEST19
+
+#ifdef TEST20
+
+#endif
 	return 0;
 }
