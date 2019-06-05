@@ -1,10 +1,18 @@
 #include <iostream>
+#include "student.h"
 
 using namespace std;
 
+
+
 int main()
 {
-	cout << "hello world" << endl;
+	CBank bank;
+	double rate = 0;
+
+	rate = bank.getRate();
+
+	cout << "rate: " << rate << endl;
 
 	return 0;
 }
