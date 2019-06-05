@@ -1,6 +1,6 @@
-#include "student.h"
+ï»¿#include "student.h"
 
-double CBank::rate = 2.5;	// ¾²Ì¬³ÉÔ±ÔÚÀàÍâ¶¨Òå
+double CBank::rate = 2.5;	// é™æ€æˆå‘˜åœ¨ç±»å¤–å®šä¹‰
 
 double CBank::getRate()
 {

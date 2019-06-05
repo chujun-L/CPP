@@ -1,4 +1,4 @@
-#ifndef _STUDENT_H
+ï»¿#ifndef _STUDENT_H
 #define _STUDENT_H
 
 class CBank {
@@ -6,7 +6,7 @@ public:
 	double getRate();
 
 private:
-	static double rate;		// ÓÃstaticÉùÃ÷rateÎª¾²Ì¬³ÉÔ±
+	static double rate;		// ç”¨staticå£°æ˜rateä¸ºé™æ€æˆå‘˜
 };
 
 #endif // !_STUDENT_H
