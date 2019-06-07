@@ -83,7 +83,7 @@ int show_menu(void)
 #ifdef TEST21
 void boyAge(int **pAge)
 {
-	int age = 20;
+	static int age = 20;	// 没有static修饰，是不安全的
 	*pAge = &age;
 }
 #endif // TEST21
