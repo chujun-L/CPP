@@ -7,12 +7,14 @@ using namespace std;
 
 int main()
 {
-	CBank bank;
-	double rate = 0;
+	CBank bank(260.6);
+	double deposit = 0;
 
-	rate = bank.getRate();
+	deposit = bank.getDeposit();
 
-	cout << "rate: " << rate << endl;
+	cout << "deposit: " << deposit << endl;
+
+	
 
 	return 0;
 }
