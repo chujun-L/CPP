@@ -5,7 +5,7 @@
 //#define NDEBUG
 #include <assert.h>
 
-#define TEST19
+#define TEST20
 
 #ifdef TEST8
 struct mybitfields
@@ -247,7 +247,9 @@ int main()
 #endif // TEST19
 
 #ifdef TEST20
-
-#endif
+    int x, y;
+    scanf("%d,%d", &x, &y);
+    printf("x: %d, y: %d\n", x, y);
+#endif // TEST20
 	return 0;
 }
