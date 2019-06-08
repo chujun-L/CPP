@@ -5,7 +5,7 @@
 //#define NDEBUG
 #include <assert.h>
 
-#define TEST19
+#define TEST21
 
 #ifdef TEST8
 struct mybitfields
@@ -79,6 +79,14 @@ int show_menu(void)
 #define trace(x, format) \
 	printf(#x "=%" #format "\n", x)		// printf("i=%d\n", i);
 #endif // TEST19
+
+#ifdef TEST21
+void boyAge(int **pAge)
+{
+	static int age = 20;	// 没有static修饰，是不安全的
+	*pAge = &age;
+}
+#endif // TEST21
 
 int main()
 {
@@ -247,7 +255,15 @@ int main()
 #endif // TEST19
 
 #ifdef TEST20
+    int x, y;
+    scanf("%d,%d", &x, &y);
+    printf("x: %d, y: %d\n", x, y);
+#endif // TEST20
 
-#endif
+#ifdef TEST21
+	int *p = NULL;
+	boyAge(&p);
+	printf("boy age: %d\n", *p);	
+#endif // TEST21
 	return 0;
 }
