@@ -138,6 +138,9 @@ int main()
 	int nPeakNum = 0;
 	int *pMap = &gMap[0][0];
 
+	int (*p1)[NUM];		// 声明一个指针数组
+	p1 = &gMap[0];		// 指向二维数组的首地址
+
 	if (ReadFile2Arry(cFileName, pMap))
 	{
 		// 遍历数组，找出峰顶或峰谷的值
