@@ -31,6 +31,7 @@ void captureMouse()
 		switch (mouse.uMsg)
 		{
 		case WM_LBUTTONDOWN:
+			/* 说明按键 */
 			if (mouse.x > 230 && mouse.x < 310 && mouse.y > 200 && mouse.y < 240)
 			{
 				putimage(150, 250, &illustrate);		//显示说明
@@ -39,7 +40,15 @@ void captureMouse()
 			{
 				solidrectangle(150, 250, 450, 550);	//遮挡说明
 			}
+
+			/* 开始按键 */
+			if (mouse.x > 350 && mouse.x < 430 && mouse.y > 200 && mouse.y < 240)
+			{
+				cleardevice();
+				return;
+			}
 			break;
+	
 		default:
 			break;
 		}
