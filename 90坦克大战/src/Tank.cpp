@@ -1,5 +1,8 @@
 #include "../include/Tank.h"
 
+/*
+ * 显示游戏开始的界面
+ */
 void menu()
 {
 	initgraph(650, 650);							// 画布大小
@@ -19,6 +22,9 @@ void menu()
 	outtextxy(365, 210, _T("开始"));				// 显示“开始”
 }
 
+/*
+ * 捕获鼠标点击的事件，对说明及开始按键进行响应
+ */
 void captureMouse()
 {
 	MOUSEMSG mouse;
@@ -48,9 +54,46 @@ void captureMouse()
 				return;
 			}
 			break;
-	
+
 		default:
 			break;
 		}
 	}
 }
+
+/*
+ * 初始化地图
+ *
+ *        map： 要初始化的地图
+ * rows, cols： 地图的行数、列数
+ */
+void init_map(int *map, int rows, int cols)
+{
+	IMAGE img_home, img_wall_1, img_wall_2;
+	loadimage(&img_home, _T("Img/home.jpg"), 50, 50);
+	loadimage(&img_wall_1, _T("Img/wall1.jpg"), 25, 25);
+	loadimage(&img_wall_2, _T("Img/wall2.jpg"), 25, 25);
+
+	/* 画地图 */
+	for (int i = 0; i < rows * cols; ++i)
+	{
+		int rt = *(map++);
+
+		switch (rt)
+		{
+		case 1:
+			putimage(25 * (i % cols), 25 * (i / rows), &img_wall_1);	// 可消失的墙
+			break;
+		case 2:
+			putimage(25 * (i % cols), 25 * (i / rows), &img_wall_2);	// 不可消失的墙
+			break;
+		case 3:
+			putimage(25 * (i % cols), 25 * (i / rows), &img_home);		// 老鹰的图案
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+
