@@ -1,20 +1,31 @@
 #ifndef __TANK_H__
 #define __TANK_H__
 
+#include <assert.h>
 #include <graphics.h>
 
 #define ROWS		26
 #define COLS		26
+#define TANK_POSITION_X	8
+#define TANK_POSITION_Y	24
 
+/* 地图的二维数组在map.h中定义 */
+extern int map[ROWS][COLS];
 
-/*
- * 显示游戏开始的界面
- */
+/* 坦克移动的方向 */
+enum DIRECTION { UP, DOWN, LEFT, RIGHT };
+
+struct tank_s {
+	int x;			// 坦克在地图的坐标
+	int y;
+	int live;		// 坦克是否生存：1(活着) 0(挂了)
+	DIRECTION dir;
+};
+
+/* 显示游戏开始的界面 */
 void menu();
 
-/*
- * 捕获鼠标点击的事件，对说明及开始按键进行响应
- */
+/* 捕获鼠标点击的事件，对说明及开始按键进行响应 */
 void captureMouse();
 
 /*
@@ -24,5 +35,21 @@ void captureMouse();
  * rows, cols： 地图的行数、列数
  */
 void init_map(int *map, int rows, int cols);
+
+/*
+ * 在地图上标记主战坦克初始化的位置
+ *
+ *  map:	地图的首地址，&map[0][0]
+ * x, y: 主战坦克初始化的位置坐标
+ * flag: 主战坦克的标记为200
+ */
+void set_prop_map(int *map, int x, int y, int flag);
+
+/*
+ * 初始化主战坦克
+ *
+ * x，y: 主战坦克在地图出现的坐标
+ */
+void init_tank(int x, int y);
 
 #endif // !__TANK_H__
