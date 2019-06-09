@@ -5,7 +5,7 @@
 //#define NDEBUG
 #include <assert.h>
 
-#define TEST21
+//#define TEST21
 
 #ifdef TEST8
 struct mybitfields
@@ -265,5 +265,11 @@ int main()
 	boyAge(&p);
 	printf("boy age: %d\n", *p);	
 #endif // TEST21
+
+#ifdef TEST22
+	int arry[10];
+	printf("%d\n", (int)sizeof(arry));
+#endif // TEST22
+
 	return 0;
 }
