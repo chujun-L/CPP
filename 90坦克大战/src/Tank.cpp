@@ -1,4 +1,9 @@
+#include <assert.h>
+#include <graphics.h>
 #include "../include/Tank.h"
+
+tank_s my_tank;
+IMAGE my_tank_img[4];
 
 /*
  * 显示游戏开始的界面
@@ -106,7 +111,6 @@ void init_map(int *map, int rows, int cols)
 void set_prop_map(int *map, int x, int y, int flag)
 {
 	assert(map != NULL);
-	assert(flag == 200);
 
 	*(map + (y * ROWS + x)) = flag;
 	*(map + (y * ROWS + (x + 1))) = flag;
@@ -125,14 +129,12 @@ void init_tank(int x, int y)
 	assert(y < ROWS);
 
 	/* 初始化主战坦克的结构体 */
-	tank_s my_tank;
 	my_tank.x = x;
 	my_tank.y = y;
 	my_tank.live = 1;
 	my_tank.dir = UP;
 
 	/* 加载主战坦克运动的4个方向的图片 */
-	IMAGE my_tank_img[4];
 	loadimage(&my_tank_img[UP], _T("Img/tank_up.jpg"), 50, 50);
 	loadimage(&my_tank_img[DOWN], _T("Img/tank_down.jpg"), 50, 50);
 	loadimage(&my_tank_img[LEFT], _T("Img/tank_left.jpg"), 50, 50);
@@ -141,4 +143,43 @@ void init_tank(int x, int y)
 	/* 设置主战坦克的坐标并显示 */
 	set_prop_map(&map[0][0], my_tank.x, my_tank.y, 200);
 	putimage(my_tank.x * 25, my_tank.y * 25, &my_tank_img[my_tank.dir]);
+}
+
+/*
+ * 坦克移动
+ *
+ * tank: 要移动的坦克
+ *  dir: 移动的方向
+ *  img: 坦克移动方向的图片
+ */
+void tank_walk(tank_s *tank, DIRECTION dir, IMAGE *img)
+{
+	/* 清除主战坦克坐标标记并用黑色方框填充移动轨迹 */
+	set_prop_map(&map[0][0], tank->x, tank->y, 0);
+	setfillcolor(BLACK);
+	solidrectangle(tank->x * 25, tank->y * 25,
+		tank->x * 25 + 50, tank->y * 25 + 50);
+
+	/* 更新tank的坐标 */
+	switch (dir)
+	{
+	case UP:
+		tank->y -= 1;
+		break;
+	case DOWN:
+		tank->y += 1;
+		break;
+	case LEFT:
+		tank->x -= 1;
+		break;
+	case RIGHT:
+		tank->x += 1;
+		break;
+	default:
+		break;
+	}
+
+	/* 设置主战坦克坐标标记并沿轨迹放置图标 */
+	set_prop_map(&map[0][0], tank->x, tank->y, 200);
+	putimage(tank->x * 25, tank->y * 25, img);
 }
