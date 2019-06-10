@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <graphics.h>
 #include "../include/Tank.h"
+#include "../include/bullet.h"
 
 tank_s my_tank;
 IMAGE my_tank_img[4];
@@ -144,6 +145,7 @@ void init_tank(int x, int y)
 	my_tank.y = y;
 	my_tank.live = 1;
 	my_tank.dir = UP;
+	my_tank.fire_bullet = fire_bullet;
 
 	/* 加载主战坦克运动的4个方向的图片 */
 	loadimage(&my_tank_img[UP], _T("Img/tank_up.jpg"), 50, 50);

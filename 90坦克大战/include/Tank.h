@@ -10,11 +10,20 @@ extern int map[ROWS][COLS];				// 地图的二维数组在map.h中定义
 
 enum DIRECTION { UP, DOWN, LEFT, RIGHT };	// 坦克移动的方向
 
+struct bullet_s
+{
+	int pos_x;							// 子弹在地图的x坐标
+	int pos_y;							// 子弹在地图的y坐标
+	int status;							// 子弹是否存在
+	DIRECTION dir;						// 子弹飞行的方向
+};
+
 struct tank_s {
 	int x;								// 坦克在地图的坐标
 	int y;
 	int live;							// 坦克是否生存：1(活着) 0(挂了)
 	DIRECTION dir;
+	void (*fire_bullet)(bullet_s *);		// 发射子弹
 };
 
 extern tank_s my_tank;					// 声明主战坦克结构体

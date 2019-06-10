@@ -3,11 +3,13 @@
 #include <graphics.h>
 #include "../include/Tank.h"
 #include "../include/map.h"
+#include "../include/bullet.h"
 
 int main()
 {
 	int key_board = 0;
 	int *pmap = &map[0][0];
+	bullet_s tank_bullet;			// 主战坦克的子弹
 
 	menu();
 	captureMouse();
@@ -60,6 +62,9 @@ int main()
 					my_tank.dir = DOWN;
 					tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
 				}
+				break;
+			case 'j':	// 发射子弹
+				my_tank.fire_bullet(&tank_bullet);
 				break;
 			default:
 				break;
