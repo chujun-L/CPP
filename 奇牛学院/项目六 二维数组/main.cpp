@@ -8,10 +8,10 @@ using namespace std;
 #define MIN 0
 
 /*
- * ¶ÁÈ¡ÎÄ¼şÄÚÈİµ½Êı×é
+ * è¯»å–æ–‡ä»¶å†…å®¹åˆ°æ•°ç»„
  *
- * sFileName: ÎÄ¼şÃû
- * nArry:     ±£´æµÄÊı×é
+ * sFileName: æ–‡ä»¶å
+ * nArry:     ä¿å­˜çš„æ•°ç»„
  */
 bool ReadFile2Arry(string sFileName, int *pArry)
 {
@@ -21,20 +21,20 @@ bool ReadFile2Arry(string sFileName, int *pArry)
 	file.open(sFileName.c_str());
 	if (file.fail())
 	{
-		cout << "´ò¿ªÎÄ¼şÊ§°Ü" << endl;
+		cout << "æ‰“å¼€æ–‡ä»¶å¤±è´¥" << endl;
 		return false;
 	}
 
-	file >> nRows >> nCols;		// ÔÚmap.txtÎÄ¼şÖĞ¶ÁÈ¡ĞĞÊı¡¢ÁĞÊı
+	file >> nRows >> nCols;		// åœ¨map.txtæ–‡ä»¶ä¸­è¯»å–è¡Œæ•°ã€åˆ—æ•°
 	if (nRows > NUM || nCols > NUM)
 	{
-		cout << "ÎÄ¼ş¹ı´ó" << endl;
+		cout << "æ–‡ä»¶è¿‡å¤§" << endl;
 		return false;
 	}
 
 	for (int i = 0; i < nRows * nCols; i++)
 	{
-		file >> *pArry++;			// ¶ÁÈ¡ÎÄ¼şÄÚÈİµ½Êı×é
+		file >> *pArry++;			// è¯»å–æ–‡ä»¶å†…å®¹åˆ°æ•°ç»„
 	}
 
 	file.close();
@@ -43,21 +43,21 @@ bool ReadFile2Arry(string sFileName, int *pArry)
 
 
 /*
- * ÅĞ¶Ïµ±Ç°µÄÖµÊÇ·ñÎª·åÖµ
+ * åˆ¤æ–­å½“å‰çš„å€¼æ˜¯å¦ä¸ºå³°å€¼
  *
- * nArry: ÒªÅĞ¶ÏµÄÖµËùÔÚµÄÊı×é
- * nRows¡¢nCols: ÒªÅĞ¶ÏµÄÖµËùÔÚÊı×éµÄÏÂ±ê
+ * nArry: è¦åˆ¤æ–­çš„å€¼æ‰€åœ¨çš„æ•°ç»„
+ * nRowsã€nCols: è¦åˆ¤æ–­çš„å€¼æ‰€åœ¨æ•°ç»„çš„ä¸‹æ ‡
  */
 bool isPeakInArry(int nArry[][NUM], int nRows, int nCols)
 {
-	if (nArry[nRows][nCols] > nArry[nRows - 1][nCols] &&		// ÉÏ
-		nArry[nRows][nCols] > nArry[nRows + 1][nCols] &&		// ÏÂ
-		nArry[nRows][nCols] > nArry[nRows][nCols - 1] &&		// ×ó
-		nArry[nRows][nCols] > nArry[nRows][nCols + 1] &&		// ÓÒ
-		nArry[nRows][nCols] > nArry[nRows - 1][nCols - 1] &&	// ×óÉÏ½Ç
-		nArry[nRows][nCols] > nArry[nRows - 1][nCols + 1] &&	// ÓÒÉÏ½Ç
-		nArry[nRows][nCols] > nArry[nRows + 1][nCols - 1] &&	// ×óÏÂ½Ç
-		nArry[nRows][nCols] > nArry[nRows + 1][nCols + 1])		// ÓÒÏÂ½Ç
+	if (nArry[nRows][nCols] > nArry[nRows - 1][nCols] &&		// ä¸Š
+		nArry[nRows][nCols] > nArry[nRows + 1][nCols] &&		// ä¸‹
+		nArry[nRows][nCols] > nArry[nRows][nCols - 1] &&		// å·¦
+		nArry[nRows][nCols] > nArry[nRows][nCols + 1] &&		// å³
+		nArry[nRows][nCols] > nArry[nRows - 1][nCols - 1] &&	// å·¦ä¸Šè§’
+		nArry[nRows][nCols] > nArry[nRows - 1][nCols + 1] &&	// å³ä¸Šè§’
+		nArry[nRows][nCols] > nArry[nRows + 1][nCols - 1] &&	// å·¦ä¸‹è§’
+		nArry[nRows][nCols] > nArry[nRows + 1][nCols + 1])		// å³ä¸‹è§’
 		
 	{
 		return true;
@@ -67,10 +67,10 @@ bool isPeakInArry(int nArry[][NUM], int nRows, int nCols)
 }
 
 /*
- * ÅĞ¶Ïµ±Ç°µÄÖµÊÇ·ñÎª·åµ×
+ * åˆ¤æ–­å½“å‰çš„å€¼æ˜¯å¦ä¸ºå³°åº•
  *
- * nArry: ÒªÅĞ¶ÏµÄÖµËùÔÚµÄÊı×é
- * nRows¡¢nCols: ÒªÅĞ¶ÏµÄÖµËùÔÚÊı×éµÄÏÂ±ê
+ * nArry: è¦åˆ¤æ–­çš„å€¼æ‰€åœ¨çš„æ•°ç»„
+ * nRowsã€nCols: è¦åˆ¤æ–­çš„å€¼æ‰€åœ¨æ•°ç»„çš„ä¸‹æ ‡
  */
 bool isValleyInArry(int nArry[][NUM], int nRows, int nCols)
 {
@@ -86,10 +86,10 @@ bool isValleyInArry(int nArry[][NUM], int nRows, int nCols)
 }
 
 /*
- * ÔÚÊı×éÕÒ³ö×î´óÖµ»ò×îĞ¡Öµ
+ * åœ¨æ•°ç»„æ‰¾å‡ºæœ€å¤§å€¼æˆ–æœ€å°å€¼
  *
- * nArry: Òª²éÕÒµÄÊı×é
- * flag£º ×î´ó»ò×îĞ¡µÄ±êÖ¾
+ * nArry: è¦æŸ¥æ‰¾çš„æ•°ç»„
+ * flagï¼š æœ€å¤§æˆ–æœ€å°çš„æ ‡å¿—
  */
 int extremes(int *nArry, int flag)
 {
@@ -115,7 +115,7 @@ int extremes(int *nArry, int flag)
 		}
 	}
 
-	// ÓÃÖ¸ÕëÔõÃ´ÍÆµ¼³ö¶şÎ¬Êı×éµÄÏÂ±ê? È»ºóÇó³önArry[i][j]
+	// ç”¨æŒ‡é’ˆæ€ä¹ˆæ¨å¯¼å‡ºäºŒç»´æ•°ç»„çš„ä¸‹æ ‡? ç„¶åæ±‚å‡ºnArry[i][j]
 	for (int n = 0; n < nRows * nCols; n++)
 	{
 		if (nRet == *pBegin)
@@ -138,9 +138,12 @@ int main()
 	int nPeakNum = 0;
 	int *pMap = &gMap[0][0];
 
+	int (*p1)[NUM];		// å£°æ˜æŒ‡é’ˆæ•°ç»„
+	p1 = &gMap[0];		// æŒ‡å‘äºŒç»´æ•°ç»„çš„é¦–åœ°å€
+
 	if (ReadFile2Arry(cFileName, pMap))
 	{
-		// ±éÀúÊı×é£¬ÕÒ³ö·å¶¥»ò·å¹ÈµÄÖµ
+		// éå†æ•°ç»„ï¼Œæ‰¾å‡ºå³°é¡¶æˆ–å³°è°·çš„å€¼
 		for (int row = 1; row < 6; row++)
 		{
 			for (int col = 1; col < 7; col++)
@@ -154,14 +157,14 @@ int main()
 
 				if (isValleyInArry(gMap, row, col))
 				{
-					cout << "¹ÈµãµÄÎ»ÖÃ£º " << gMap[row][col] << endl;
+					cout << "è°·ç‚¹çš„ä½ç½®ï¼š " << gMap[row][col] << endl;
 				}
 			}
 		}
-		cout << "·åµãµÄÊıÄ¿£º " << nPeakNum << endl;
+		cout << "å³°ç‚¹çš„æ•°ç›®ï¼š " << nPeakNum << endl;
 
-		cout << "×î´óÖµ£º" << extremes(pMap, MAX) << endl;
-		cout << "×îĞ¡Öµ£º" << extremes(pMap, MIN) << endl;
+		cout << "æœ€å¤§å€¼ï¼š" << extremes(pMap, MAX) << endl;
+		cout << "æœ€å°å€¼ï¼š" << extremes(pMap, MIN) << endl;
 		cout << "hello world" << endl;
 	}
 
