@@ -232,58 +232,38 @@ int keyboad_to_int()
 	return -1;
 }
 
-void move_up()
+void move_now(int val, int cmp, int *pmap, DIRECTION dir,
+	int x, int y, int new_x, int new_y)
 {
-	tank_s *ptank = &my_tank;
-	int *pmap = &map[0][0];
-
-	if (ptank->y > 0 &&
-		get_prop_map(pmap, my_tank.x, my_tank.y - 1) == 0 &&
-		get_prop_map(pmap, my_tank.x + 1, my_tank.y - 1) == 0)
+	if (val > cmp &&
+		get_prop_map(pmap, x, y) == 0 &&
+		get_prop_map(pmap, new_x, new_y) == 0)
 	{
-		my_tank.dir = UP;
+		my_tank.dir = dir;
 		tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
 	}
+}
+
+void move_up()
+{
+	move_now(my_tank.y, 0, &map[0][0], UP,
+		my_tank.x, my_tank.y - 1, my_tank.x + 1, my_tank.y - 1);
 }
 
 void move_down()
 {
-	tank_s *ptank = &my_tank;
-	int *pmap = &map[0][0];
-
-	if (ptank->y < ROWS - 2 &&
-		get_prop_map(pmap, my_tank.x, my_tank.y + 2) == 0 &&
-		get_prop_map(pmap, my_tank.x + 1, my_tank.y + 2) == 0)
-	{
-		my_tank.dir = DOWN;
-		tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
-	}
+	move_now(ROWS - 2, my_tank.y, &map[0][0], DOWN,
+		my_tank.x, my_tank.y + 2, my_tank.x + 1, my_tank.y + 2);
 }
 
 void move_left()
 {
-	tank_s *ptank = &my_tank;
-	int *pmap = &map[0][0];
-
-	if (ptank->x > 0 &&
-		get_prop_map(pmap, my_tank.x - 1, my_tank.y) == 0 &&
-		get_prop_map(pmap, my_tank.x - 1, my_tank.y + 1) == 0)
-	{
-		my_tank.dir = LEFT;
-		tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
-	}
+	move_now(my_tank.x, 0, &map[0][0], LEFT,
+		my_tank.x - 1, my_tank.y, my_tank.x - 1, my_tank.y + 1);
 }
 
 void move_right()
 {
-	tank_s *ptank = &my_tank;
-	int *pmap = &map[0][0];
-
-	if (ptank->x < COLS - 2 &&
-		get_prop_map(pmap, my_tank.x + 2, my_tank.y) == 0 &&
-		get_prop_map(pmap, my_tank.x + 2, my_tank.y + 1) == 0)
-	{
-		my_tank.dir = RIGHT;
-		tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
-	}
+	move_now(COLS - 2, my_tank.x, &map[0][0], RIGHT,
+		my_tank.x + 2, my_tank.y, my_tank.x + 2, my_tank.y + 1);
 }
