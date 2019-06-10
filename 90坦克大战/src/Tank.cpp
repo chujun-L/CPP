@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <graphics.h>
+#include <conio.h>
 #include "../include/Tank.h"
 #include "../include/bullet.h"
 
@@ -195,4 +196,94 @@ void tank_walk(tank_s *tank, DIRECTION dir, IMAGE *img)
 	/* 设置主战坦克坐标标记并沿轨迹放置图标 */
 	set_prop_map(&map[0][0], tank->x, tank->y, 200);
 	putimage(tank->x * 25, tank->y * 25, img);
+}
+
+/* 将检测到的键盘按下的键值转换成整形数据 */
+int keyboad_to_int()
+{
+	int keyboard = 0;
+
+	if (_kbhit())
+	{
+		keyboard = _getch();
+
+		switch (keyboard)
+		{
+		case 'w':		// 上
+			return 0;
+			break;
+		case 's':		// 下
+			return 1;
+			break;
+		case 'a':		// 左
+			return 2;
+			break;
+		case 'd':		// 右
+			return 3;
+			break;
+		case 'j':		// 发射子弹
+			return 4;
+			break;
+		default:
+			break;
+		}
+	}
+
+	return -1;
+}
+
+void move_up()
+{
+	tank_s *ptank = &my_tank;
+	int *pmap = &map[0][0];
+
+	if (ptank->y > 0 &&
+		get_prop_map(pmap, my_tank.x, my_tank.y - 1) == 0 &&
+		get_prop_map(pmap, my_tank.x + 1, my_tank.y - 1) == 0)
+	{
+		my_tank.dir = UP;
+		tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
+	}
+}
+
+void move_down()
+{
+	tank_s *ptank = &my_tank;
+	int *pmap = &map[0][0];
+
+	if (ptank->y < ROWS - 2 &&
+		get_prop_map(pmap, my_tank.x, my_tank.y + 2) == 0 &&
+		get_prop_map(pmap, my_tank.x + 1, my_tank.y + 2) == 0)
+	{
+		my_tank.dir = DOWN;
+		tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
+	}
+}
+
+void move_left()
+{
+	tank_s *ptank = &my_tank;
+	int *pmap = &map[0][0];
+
+	if (ptank->x > 0 &&
+		get_prop_map(pmap, my_tank.x - 1, my_tank.y) == 0 &&
+		get_prop_map(pmap, my_tank.x - 1, my_tank.y + 1) == 0)
+	{
+		my_tank.dir = LEFT;
+		tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
+	}
+}
+
+void move_right()
+{
+	tank_s *ptank = &my_tank;
+	int *pmap = &map[0][0];
+
+	if (ptank->x < COLS - 2 &&
+		get_prop_map(pmap, my_tank.x + 2, my_tank.y) == 0 &&
+		get_prop_map(pmap, my_tank.x + 2, my_tank.y + 1) == 0)
+	{
+		my_tank.dir = RIGHT;
+		tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
+	}
 }

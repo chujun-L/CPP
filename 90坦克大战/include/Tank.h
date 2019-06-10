@@ -78,4 +78,12 @@ void init_tank(int x, int y);
  */
 void tank_walk(tank_s *tank, DIRECTION dir, IMAGE *img);
 
+/* 将检测到的键盘按下的键值转换成整形数据 */
+int keyboad_to_int();
+
+void move_up();
+void move_down();
+void move_left();
+void move_right();
+
 #endif // !__TANK_H__

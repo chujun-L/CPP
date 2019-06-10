@@ -7,9 +7,12 @@
 
 int main()
 {
-	int key_board = 0;
+	int key = 0;
 	int *pmap = &map[0][0];
 	bullet_s tank_bullet;			// 主战坦克的子弹
+	tank_s *ptank = &my_tank;
+
+	void (*pfunc[])() = { move_up, move_down, move_left, move_right };
 
 	menu();
 	captureMouse();
@@ -22,53 +25,14 @@ int main()
 
 	while (1)
 	{
-		if (_kbhit())	// 是否有按键按下
+		key = keyboad_to_int();
+		if (key >= 0 && key <= 3)
 		{
-			key_board = _getch();
-			switch (key_board)
-			{
-			case 'a':	// 左
-				if (my_tank.x > 0 &&
-					get_prop_map(pmap, my_tank.x - 1, my_tank.y) == 0 &&
-					get_prop_map(pmap, my_tank.x - 1, my_tank.y + 1) == 0)
-				{
-					my_tank.dir = LEFT;
-					tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
-				}
-				break;
-			case 'd':	// 右
-				if (my_tank.x < COLS - 2 &&
-					get_prop_map(pmap, my_tank.x + 2, my_tank.y) == 0 &&
-					get_prop_map(pmap, my_tank.x + 2, my_tank.y + 1) == 0)
-				{
-					my_tank.dir = RIGHT;
-					tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
-				}
-				break;
-			case 'w':	// 上
-				if (my_tank.y > 0 &&
-					get_prop_map(pmap, my_tank.x, my_tank.y - 1) == 0 &&
-					get_prop_map(pmap, my_tank.x + 1, my_tank.y - 1) == 0)
-				{
-					my_tank.dir = UP;
-					tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
-				}
-				break;
-			case 's':	// 下
-				if (my_tank.y < ROWS - 2 &&
-					get_prop_map(pmap, my_tank.x, my_tank.y + 2) == 0 &&
-					get_prop_map(pmap, my_tank.x + 1, my_tank.y + 2) == 0)
-				{
-					my_tank.dir = DOWN;
-					tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
-				}
-				break;
-			case 'j':	// 发射子弹
-				my_tank.fire_bullet(&tank_bullet);
-				break;
-			default:
-				break;
-			}
+			pfunc[key]();
+		}
+		else if (key == 4)
+		{
+			ptank->fire_bullet(&tank_bullet);
 		}
 	}
 	//system("pause");
