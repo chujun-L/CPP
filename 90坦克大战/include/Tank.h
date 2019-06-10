@@ -46,6 +46,14 @@ void init_map(int *map, int rows, int cols);
 void set_prop_map(int *map, int x, int y, int flag);
 
 /*
+ * 根据坐标获取在地图上标记的值
+ *
+ *  map:	地图的首地址，&map[0][0]
+ *  x,y: 地图的坐标
+ */
+int get_prop_map(int *map, int x, int y);
+
+/*
  * 初始化主战坦克
  *
  * x，y: 主战坦克在地图出现的坐标
