@@ -26,19 +26,40 @@ int main()
 			switch (key_board)
 			{
 			case 'a':	// ×ó
-				if ((my_tank.x) > 0 &&
-					*(pmap + (my_tank.y * COLS + (my_tank.x - 1))) == 0 &&
-					*(pmap + ((my_tank.y + 1) * COLS + (my_tank.x - 1))) == 0)
+				if (my_tank.x > 0 &&
+					get_prop_map(pmap, my_tank.x - 1, my_tank.y) == 0 &&
+					get_prop_map(pmap, my_tank.x - 1, my_tank.y + 1) == 0)
 				{
 					my_tank.dir = LEFT;
 					tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
 				}
 				break;
 			case 'd':	// ÓÒ
+				if (my_tank.x < COLS - 2 &&
+					get_prop_map(pmap, my_tank.x + 2, my_tank.y) == 0 &&
+					get_prop_map(pmap, my_tank.x + 2, my_tank.y + 1) == 0)
+				{
+					my_tank.dir = RIGHT;
+					tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
+				}
 				break;
 			case 'w':	// ÉÏ
+				if (my_tank.y > 0 &&
+					get_prop_map(pmap, my_tank.x, my_tank.y - 1) == 0 &&
+					get_prop_map(pmap, my_tank.x + 1, my_tank.y - 1) == 0)
+				{
+					my_tank.dir = UP;
+					tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
+				}
 				break;
 			case 's':	// ÏÂ
+				if (my_tank.y < ROWS - 2 &&
+					get_prop_map(pmap, my_tank.x, my_tank.y + 2) == 0 &&
+					get_prop_map(pmap, my_tank.x + 1, my_tank.y + 2) == 0)
+				{
+					my_tank.dir = DOWN;
+					tank_walk(&my_tank, my_tank.dir, &my_tank_img[my_tank.dir]);
+				}
 				break;
 			default:
 				break;

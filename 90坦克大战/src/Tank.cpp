@@ -112,10 +112,21 @@ void set_prop_map(int *map, int x, int y, int flag)
 {
 	assert(map != NULL);
 
-	*(map + (y * ROWS + x)) = flag;
-	*(map + (y * ROWS + (x + 1))) = flag;
-	*(map + ((y + 1) * ROWS + x)) = flag;
-	*(map + ((y + 1) * ROWS + (x + 1))) = flag;
+	*(map + (y * COLS + x)) = flag;
+	*(map + (y * COLS + (x + 1))) = flag;
+	*(map + ((y + 1) * COLS + x)) = flag;
+	*(map + ((y + 1) * COLS + (x + 1))) = flag;
+}
+
+/*
+ * 根据坐标获取在地图上标记的值
+ *
+ *  map:	地图的首地址，&map[0][0]
+ *  x,y: 地图的坐标
+ */
+int get_prop_map(int *map, int x, int y)
+{
+	return *(map + (y * COLS + x));
 }
 
 /*
