@@ -5,7 +5,7 @@
 //#define NDEBUG
 #include <assert.h>
 
-#define TEST23
+#define TEST25
 
 #ifdef TEST8
 struct mybitfields
@@ -98,6 +98,14 @@ void print(char *s)
 	}
 }
 #endif // TEST23
+
+#ifdef TEST25
+void count(int n)
+{
+	unsigned int tmp = n - ((n >> 1)&033333333333) - ((n >> 2)&011111111111);
+	printf("%d\n", ((tmp + (tmp >> 3))&030707070707)%63);
+}
+#endif // TEST25
 
 int main()
 {
@@ -287,5 +295,17 @@ int main()
 	print(str);
 #endif // TEST23
 
+#ifdef TEST24
+	int y = 10;
+	int x = y++;
+
+	printf("x: %d  y: %d\n", x, y);
+
+#endif // TEST24
+
+#ifdef TEST25
+	int n = 15;
+	count(n);
+#endif // TEST25
 	return 0;
 }
