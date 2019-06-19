@@ -5,7 +5,7 @@
 //#define NDEBUG
 #include <assert.h>
 
-#define TEST25
+#define TEST26
 
 #ifdef TEST8
 struct mybitfields
@@ -307,5 +307,38 @@ int main()
 	int n = 15;
 	count(n);
 #endif // TEST25
+
+#ifdef TEST26	// 空格替换
+	char *str1 = "we are lucky";
+	int str1_len = strlen(str1);
+	int count = 0;
+
+	for (int i = 0; i < str1_len; ++i) {
+		if (str1[i] == ' ') {
+			++count;			// 计算空格的个数
+		}
+	}
+
+	char *str = (char *)malloc(str1_len + 2 * count);
+	strcpy_s(str, str1_len + 2 * count, str1);
+	printf("%s\n", str);
+
+	int str_len = strlen(str);
+
+	for (int i = str_len - 1; i >= 0; --i) {
+		if (str[i] != ' ') {
+			str[i + 2 * count] = str[i];
+		}
+		else {
+			--count;
+			str[i + 2 * count] = '%';
+			str[i + 2 * count + 1] = '2';
+			str[i + 2 * count + 2] = '0';
+		}
+	}
+
+	printf("%s\n", str);
+#endif // TEST26
+
 	return 0;
 }
