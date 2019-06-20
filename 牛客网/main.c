@@ -5,7 +5,8 @@
 //#define NDEBUG
 #include <assert.h>
 
-#define TEST26
+//#define TEST26
+#define TEST10
 
 #ifdef TEST8
 struct mybitfields
@@ -17,27 +18,15 @@ struct mybitfields
 #endif // TEST8
 
 #ifdef TEST10
-char *MyStrcpy(char *cDest, const char *cSrc, int nSize)
+char *MyStrcpy(char *cDest, const char *cSrc)
 {
-	assert(cDest);
-	assert(cSrc);
+	assert((cDest != NULL) && (cSrc != NULL));
 
 	char *ret = cDest;
 
-	// 有溢出风险
-	//while (*cDest++ = *cSrc++);
-	//{
-	//	cDest++;
-	//	cSrc++;
-	//}
+	while ((*cDest++ = *cSrc++) != '\0');
 
-	while (nSize--)
-	{
-		*cDest++ = *cSrc++;
-		//nSize--;
-	}
-
-	return ret;
+	return cDest;
 }
 #endif // TEST10
 
@@ -55,15 +44,15 @@ void func()
 void func1(void)
 {
 	printf("fun1\n");
-}	
-void func2(void)	
+}
+void func2(void)
 {
 	printf("fun2\n");
-}	
-void func3(void)	
+}
+void func3(void)
 {
 	printf("fun3\n");
-}	
+}
 int show_menu(void)
 {
 	int n = 0;
@@ -102,8 +91,8 @@ void print(char *s)
 #ifdef TEST25
 void count(int n)
 {
-	unsigned int tmp = n - ((n >> 1)&033333333333) - ((n >> 2)&011111111111);
-	printf("%d\n", ((tmp + (tmp >> 3))&030707070707)%63);
+	unsigned int tmp = n - ((n >> 1) & 033333333333) - ((n >> 2) & 011111111111);
+	printf("%d\n", ((tmp + (tmp >> 3)) & 030707070707) % 63);
 }
 #endif // TEST25
 
@@ -156,7 +145,7 @@ int main()
 	char buf[20];
 	char *cSrc = "hello world";
 
-	MyStrcpy(buf, cSrc, sizeof(buf));
+	MyStrcpy(buf, cSrc);
 
 	printf("%s\n", buf);
 
@@ -188,7 +177,7 @@ int main()
 		{
 			printf("输入的数不能为负数\n");
 		}
-		else if ( n == 1)
+		else if (n == 1)
 		{
 			printf("1\n");
 			exit(0);
@@ -236,15 +225,15 @@ int main()
 	printf("%c\n", ++(*p));
 #endif
 	// 指针对数据的访问
-	int a[] = {10, 15, 4, 25, 3, -4};
+	int a[] = { 10, 15, 4, 25, 3, -4 };
 	int *p = &a[2];
 	// *(p+1), p[-1], p-a, a[*p++], *(a+a[2])
-	printf("%d\n", *(a+a[2]));
+	printf("%d\n", *(a + a[2]));
 #endif // TEST17
 
 #ifdef TEST18
 	int choice = 0;
-	void (*pFuncArray[])(void) = {func1, func2, func3};	// 函数指针数组
+	void (*pFuncArray[])(void) = { func1, func2, func3 };	// 函数指针数组
 
 	while (1)
 	{
@@ -270,19 +259,19 @@ int main()
 
 	trace(i, d);
 	trace(x, f);
-	trace(s, s);	
+	trace(s, s);
 #endif // TEST19
 
 #ifdef TEST20
-    int x, y;
-    scanf("%d,%d", &x, &y);
-    printf("x: %d, y: %d\n", x, y);
+	int x, y;
+	scanf("%d,%d", &x, &y);
+	printf("x: %d, y: %d\n", x, y);
 #endif // TEST20
 
 #ifdef TEST21
 	int *p = NULL;
 	boyAge(&p);
-	printf("boy age: %d\n", *p);	
+	printf("boy age: %d\n", *p);
 #endif // TEST21
 
 #ifdef TEST22
