@@ -62,10 +62,14 @@ bool Game2048::randNewNumber()
 
 bool Game2048::moveLeft()
 {
+	int saveData[CELL][CELL] = { 0 };
+
 	for (int row = 0; row < CELL; ++row) {
 		int saveCellNumber = 0, currentWriteCell = 0;
 
 		for (int col = 0; col < CELL; ++col) {
+			saveData[row][col] = data[row][col];
+
 			/* 1) 跳过数值为0的格子 */
 			if (data[row][col] == 0) continue;
 
@@ -79,6 +83,9 @@ bool Game2048::moveLeft()
 				if (saveCellNumber == data[row][col]) {
 					data[row][currentWriteCell] = saveCellNumber << 1;
 					saveCellNumber = 0;
+
+					/* 游戏胜利 */
+					if (data[row][currentWriteCell] == TARGET)	gameStatus = GS_WIN;
 				}
 				/* 3-2) 相邻数据不相等时 */
 				else {
@@ -99,7 +106,16 @@ bool Game2048::moveLeft()
 		}
 	}
 
-	return true;
+	/**
+	 * 所有的数据都移动到格子的最左、最右、最上、最下时，
+	 * 再按该方向的键时不产生随机数，需要按其他方向的键
+     */
+	for (int i = 0; i < (CELL << 2); ++i) {
+		if (data[i / CELL][i % CELL] != saveData[i / CELL][i % CELL])
+			return true;
+	}
+
+	return false;
 }
 
 void Game2048::rotate90Counterclockwise()
@@ -117,16 +133,58 @@ void Game2048::rotate90Counterclockwise()
 	}
 }
 
-void Game2048::drawGameScreen()
-{	
-	cleardevice();
+bool Game2048::isGameOver()
+{
+	for (int row = 0; row < CELL; ++row) {
+		for (int col = 0; col < CELL; ++col) {
+			if ((col + 1 < CELL) &&
+				(data[row][col] * data[row][col + 1] == 0 ||
+					data[row][col] == data[row][col + 1])) {
+				return false;
+			}
 
-	for (int i = 0; i < (CELL << 2); ++i) {
-		drawCell(i / CELL, i % CELL);								// 画格子
-		drawNum(i / CELL, i % CELL, data[i / CELL][i % CELL]);		// 画数字
+			if ((row + 1 < CELL) &&
+				(data[row][col] * data[row + 1][col] == 0 ||
+					data[row][col] == data[row + 1][col])) {
+				return false;
+			}
+		}
 	}
 
-	gameStatus = GS_NORMAL;
+	return true;
+}
+
+void Game2048::drawGameScreen()
+{	
+	if (gameStatus == GS_WIN) {
+		cleardevice();
+		settextcolor(RED);
+		outtextxy(80, 100, "Winer");
+		settextcolor(BLACK);
+	}
+	else if (gameStatus == GS_FAIL) {
+		cleardevice();
+		settextcolor(RED);
+		outtextxy(80, 100, "Game Over");
+		settextcolor(BLACK);
+	}
+	else {
+		cleardevice();
+
+		for (int i = 0; i < (CELL << 2); ++i) {
+			drawCell(i / CELL, i % CELL);								// 画格子
+			drawNum(i / CELL, i % CELL, data[i / CELL][i % CELL]);		// 画数字
+		}
+
+		settextstyle(18, 0, _T("黑体"));
+		settextcolor(RED);
+		outtextxy(10, 250, "press r to start/restart");
+		outtextxy(10, 270, "press ← ↑ → ↓ to move");
+		settextcolor(BLACK);
+		settextstyle(FONT_HEIGHT, 0, _T("黑体"));
+
+		gameStatus = GS_NORMAL;
+	}
 }
 
 
@@ -139,6 +197,7 @@ void Game2048::setTestData()
 
 void Game2048::processKeysCode()
 {
+	bool update = false;
 	int keyCode = _getch();
 
 	if (keyCode >= 'a' && keyCode <= 'z') {
@@ -148,18 +207,18 @@ void Game2048::processKeysCode()
 	switch (keyCode) {
 	case 72:						// 向上键
 		rotate90Counterclockwise();
-		moveLeft();
+		update = moveLeft();
 		rotate90Counterclockwise();
 		rotate90Counterclockwise();
 		rotate90Counterclockwise();
 		break;
 	case 75:						// 向左键
-		moveLeft();
+		update = moveLeft();
 		break;
 	case 77:						// 向右键
 		rotate90Counterclockwise();
 		rotate90Counterclockwise();
-		moveLeft();
+		update = moveLeft();
 		rotate90Counterclockwise();
 		rotate90Counterclockwise();
 		break;
@@ -167,7 +226,7 @@ void Game2048::processKeysCode()
 		rotate90Counterclockwise();
 		rotate90Counterclockwise();
 		rotate90Counterclockwise();
-		moveLeft();
+		update = moveLeft();
 		rotate90Counterclockwise();
 		break;
 	case 'R':					// 重启游戏
@@ -180,6 +239,13 @@ void Game2048::processKeysCode()
 		break;
 	}
 	Sleep(100);					// 减少CPU的负载
+
+	if (update) {
+		randNewNumber();			// 移动后随机的格子产生随机的数字2或者4
+
+		/* 游戏失败 */
+		if (isGameOver()) gameStatus = GS_FAIL;
+	}
 }
 
 int Game2048::getGameStatus()

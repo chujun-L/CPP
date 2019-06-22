@@ -1,8 +1,8 @@
 ﻿#ifndef GAME_H
 #define GAME_H
 
-#define SCREEN_WIDTH		350
-#define SCREEN_HEIGHT		250
+#define SCREEN_WIDTH		240
+#define SCREEN_HEIGHT		300
 
 #define FONT_HEIGHT		25						// 字体高度
 
@@ -14,6 +14,8 @@
 #define GS_WIN			1
 #define GS_NORMAL			2
 #define GS_QUIT			3
+
+#define TARGET			2048						// 当格子的数值达到该值时，游戏胜利
 
 class Game2048 {
 public:
@@ -30,6 +32,7 @@ private:
 	bool randNewNumber();							// 产生随机的数字2或者4
 	bool moveLeft();								// 左移格子里面的数字
 	void rotate90Counterclockwise();				// 逆时针旋转90度
+	bool isGameOver();							// 判断游戏是否失败
 
 	int data[CELL][CELL];
 	int gameStatus;

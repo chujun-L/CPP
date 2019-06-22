@@ -34,7 +34,6 @@ int main(void)
 	do {
 		game.drawGameScreen();
 		game.processKeysCode();
-
 	} while (GS_QUIT != game.getGameStatus());
 
 	closegraph();
