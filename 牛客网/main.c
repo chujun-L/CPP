@@ -5,8 +5,7 @@
 //#define NDEBUG
 #include <assert.h>
 
-//#define TEST26
-#define TEST10
+#define TEST27
 
 #ifdef TEST8
 struct mybitfields
@@ -329,5 +328,12 @@ int main()
 	printf("%s\n", str);
 #endif // TEST26
 
+#ifdef TEST27	// 原码、反码、补码
+	unsigned char i = 1;
+	//i -= 4;
+	printf("i: %d\n", i);
+#endif // TEST27
+
+	system("pause");
 	return 0;
 }
