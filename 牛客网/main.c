@@ -21,8 +21,6 @@ char *MyStrcpy(char *cDest, const char *cSrc)
 {
 	assert((cDest != NULL) && (cSrc != NULL));
 
-	char *ret = cDest;
-
 	while ((*cDest++ = *cSrc++) != '\0');
 
 	return cDest;
