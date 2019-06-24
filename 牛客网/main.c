@@ -334,7 +334,7 @@ int main()
 	printf("i: %d\n", i);
 #endif // TEST27
 
-#ifdef TEST28
+#ifdef TEST28	// printf返回值是输出的长度
 	int i = 43;
 	printf("%d", printf("%d", printf("%d", i)));
 #endif // TEST28
