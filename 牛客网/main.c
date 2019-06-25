@@ -5,7 +5,7 @@
 //#define NDEBUG
 #include <assert.h>
 
-#define TEST28
+#define TEST29
 
 #ifdef TEST8
 struct mybitfields
@@ -92,6 +92,22 @@ void count(int n)
 	printf("%d\n", ((tmp + (tmp >> 3)) & 030707070707) % 63);
 }
 #endif // TEST25
+
+#ifdef TEST29
+int add(int *x, int *y, int *z)
+{
+	/*
+	 *   *x=1, *y=1, *z=1
+	 *	xyz的解引用虽然都为1，但1可以是相同的地址或者是不同的地址
+	 */
+	*x += *x;
+	*y += *x;
+	*z += *y;
+
+	return *z;
+}
+#endif // TEST29
+
 
 int main()
 {
@@ -337,6 +353,12 @@ int main()
 	printf("%d", printf("%d", printf("%d", i)));
 #endif // TEST28
 
+#ifdef TEST29
+
+	int a = 1, b = 1, c = 1;
+	printf("%d\n", add(&a, &a, &a));
+
+#endif // TEST29
 
 	system("pause");
 	return 0;
