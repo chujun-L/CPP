@@ -5,7 +5,7 @@
 //#define NDEBUG
 #include <assert.h>
 
-#define TEST29
+#define TEST30
 
 #ifdef TEST8
 struct mybitfields
@@ -107,6 +107,9 @@ int add(int *x, int *y, int *z)
 	return *z;
 }
 #endif // TEST29
+
+
+
 
 
 int main()
@@ -359,6 +362,26 @@ int main()
 	printf("%d\n", add(&a, &a, &a));
 
 #endif // TEST29
+
+#ifdef TEST30	// 将一个整形数组的奇数部分放在左边，偶数部分放在右边，并保持它们原来的次序不变
+	int arry[] = { 5, 4, 6, 3, 1, 8 };
+
+	for (int i = 0; i < sizeof(arry) / sizeof(int); ++i) {
+		if (arry[i] % 2 == 0) continue;
+
+		for (int j = i - 1; j >= 0; --j) {
+			if (arry[j] % 2 != 0) break;
+
+			int tmp = arry[j];
+			arry[j] = arry[j + 1];
+			arry[j + 1] = tmp;
+		}
+	}
+
+	for (int i = 0; i < sizeof(arry) / sizeof(int); ++i) {
+		printf("%d ", arry[i]);
+	}
+#endif // TEST30
 
 	system("pause");
 	return 0;
