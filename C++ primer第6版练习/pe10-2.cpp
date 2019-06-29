@@ -11,7 +11,7 @@ private:
 	char fname[LIMIT];				// first name
 
 public:
-	Person() { lname = ""; fname[0] = '\0'; }
+	Person() { lname = ""; fname[0] = '\0'; }				// 类内初始化数据成员
 	Person(const string &ln, const char *fn = "Heyyou");
 
 	void Show() const;
@@ -35,7 +35,7 @@ void Person::FormalShow() const
 	cout << lname << ", " << fname << endl;
 }
 
-int main()
+int main2()
 {
 	Person one;
 	one.Show();
