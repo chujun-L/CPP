@@ -75,7 +75,7 @@ void BankAccount::withdraw(double cash)
 	}
 }
 
-int main()
+int main1()
 {
 	BankAccount frog("kermit", "croak322", 123.00);
 	frog.show();
